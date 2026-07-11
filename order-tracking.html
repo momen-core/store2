@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تتبع الطلب | فيونكة</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎀</text></svg>">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    .tracking-card { max-width: 600px; margin: 0 auto; padding: var(--space-2xl); }
+    .tracking-result { display: none; margin-top: var(--space-2xl); border-top: 1px dashed var(--border); padding-top: var(--space-xl); }
+    .status-timeline { display: flex; justify-content: space-between; position: relative; margin: var(--space-2xl) 0; }
+    .status-timeline::before {
+      content: ''; position: absolute; top: 15px; left: 0; right: 0; height: 2px; background: var(--border); z-index: 1;
+    }
+    .timeline-step { position: relative; z-index: 2; text-align: center; flex: 1; }
+    .timeline-icon { 
+      width: 32px; height: 32px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; color: var(--text-muted);
+      transition: all 0.3s ease;
+    }
+    .timeline-step.active .timeline-icon { border-color: var(--primary); background: var(--primary); color: white; }
+    .timeline-step.completed .timeline-icon { border-color: var(--success); background: var(--success); color: white; }
+    .timeline-label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); }
+    .timeline-step.active .timeline-label { color: var(--primary-dark); }
+    
+    .order-details-table { width: 100%; border-collapse: collapse; margin-top: var(--space-md); }
+    .order-details-table td { padding: 8px 0; border-bottom: 1px solid var(--border-light); font-size: 0.9rem; }
+    .order-details-table td:last-child { text-align: left; font-weight: 700; }
+  </style>
+</head>
+<body>
+
+<header class="header" id="mainHeader">
+  <div class="header-main" style="justify-content:center">
+    <a href="index.html" class="logo">
+      <div>
+        <div class="logo-text">فيونكة</div>
+        <span class="logo-sub">Fayonka</span>
+      </div>
+    </a>
+  </div>
+</header>
+
+<main class="section" style="min-height: 60vh;">
+  <div class="container">
+    
+    <div class="card tracking-card animate-fade">
+      <div class="text-center mb-xl">
+        <h1 style="font-size:1.5rem;margin-bottom:8px">تتبع طلبك 📦</h1>
+        <p class="text-secondary">أدخلي رقم الطلب ورقم الهاتف المرتبط به لمعرفة حالة شحنتك.</p>
+      </div>
+      
+      <form id="trackingForm" onsubmit="handleTracking(event)">
+        <div class="form-group mb-md">
+          <label class="form-label required">رقم الطلب</label>
+          <input type="text" id="trackOrderId" class="form-input" placeholder="مثال: ORD-001" required>
+        </div>
+        <div class="form-group mb-lg">
+          <label class="form-label required">رقم الهاتف المرتبط بالطلب</label>
+          <input type="tel" id="trackPhone" class="form-input" placeholder="01xxxxxxxxx" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-full btn-lg">عرض حالة الطلب</button>
+      </form>
+
+      <div id="trackingResult" class="tracking-result">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-md)">
+          <h3 style="margin:0;font-size:1.1rem">الطلب: <span id="resOrderId" style="color:var(--primary)"></span></h3>
+          <span id="resStatusBadge" class="badge"></span>
+        </div>
+        
+        <div class="status-timeline" id="statusTimeline">
+          <!-- Rendered by JS -->
+        </div>
+
+        <div style="background:var(--bg-secondary);padding:var(--space-md);border-radius:var(--radius-md)">
+          <h4 style="margin-bottom:8px;font-size:0.95rem">تفاصيل التوصيل</h4>
+          <table class="order-details-table">
+            <tr><td>الاسم:</td><td id="resName"></td></tr>
+            <tr><td>العنوان:</td><td id="resAddress"></td></tr>
+            <tr><td>تاريخ الطلب:</td><td id="resDate"></td></tr>
+            <tr style="border:none"><td>الإجمالي المطلوب دفعه:</td><td id="resTotal" style="color:var(--primary);font-size:1.1rem"></td></tr>
+          </table>
+        </div>
+      </div>
+      
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-bottom" style="border-top:none">
+    <div class="footer-bottom-inner" style="justify-content:center">
+      <span>© 2025 فيونكة. جميع الحقوق محفوظة</span>
+      <div class="footer-developer" style="margin-right:15px; border-right:1px solid rgba(255,255,255,0.2); padding-right:15px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        تم التطوير بـ
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#e25555" stroke-width="2" fill="#e25555"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="#e25555"/></svg>
+        بواسطة <a href="https://wa.me/201556269794" target="_blank" style="color:var(--primary);font-weight:bold;">مؤمن</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/db.js"></script>
+<script src="js/app.js"></script>
+<script>
+  function handleTracking(e) {
+    e.preventDefault();
+    const orderId = document.getElementById('trackOrderId').value.trim().toUpperCase();
+    const phone = document.getElementById('trackPhone').value.trim();
+    
+    const order = DB.getOrderById(orderId);
+    
+    if (!order) {
+      App.toast('error', 'عذراً', 'رقم الطلب غير صحيح');
+      document.getElementById('trackingResult').style.display = 'none';
+      return;
+    }
+    
+    if (order.customer.phone !== phone && order.customer.whatsapp !== phone) {
+      App.toast('error', 'عذراً', 'رقم الهاتف لا يتطابق مع بيانات الطلب');
+      document.getElementById('trackingResult').style.display = 'none';
+      return;
+    }
+    
+    // Found order
+    document.getElementById('trackingResult').style.display = 'block';
+    document.getElementById('resOrderId').textContent = order.id;
+    document.getElementById('resName').textContent = order.customer.name;
+    document.getElementById('resAddress').textContent = `${order.customer.governorate}، ${order.customer.city}`;
+    document.getElementById('resDate').textContent = new Date(order.createdAt).toLocaleDateString('ar-EG');
+    document.getElementById('resTotal').textContent = App.formatPrice(order.total);
+    
+    // Status Badge
+    const badgeMap = {
+      new: { text: 'جديد', class: 'badge-primary' },
+      processing: { text: 'جاري التجهيز', class: 'badge-warning' },
+      shipped: { text: 'تم الشحن', class: 'badge-info' },
+      delivered: { text: 'تم التوصيل', class: 'badge-success' },
+      cancelled: { text: 'ملغي', class: 'badge-danger' }
+    };
+    const b = badgeMap[order.status] || badgeMap['new'];
+    const badgeEl = document.getElementById('resStatusBadge');
+    badgeEl.textContent = b.text;
+    badgeEl.className = 'badge ' + b.class;
+    
+    // Timeline
+    renderTimeline(order.status);
+  }
+  
+  function renderTimeline(status) {
+    const timeline = document.getElementById('statusTimeline');
+    if (status === 'cancelled') {
+      timeline.innerHTML = `<div style="color:var(--danger);text-align:center;width:100%;font-weight:bold;padding:20px 0;">تم إلغاء الطلب ❌</div>`;
+      return;
+    }
+    
+    const steps = [
+      { id: 'new', label: 'تم الطلب', icon: '📝' },
+      { id: 'processing', label: 'جاري التجهيز', icon: '⚙️' },
+      { id: 'shipped', label: 'في الطريق', icon: '🚚' },
+      { id: 'delivered', label: 'تم التوصيل', icon: '✅' }
+    ];
+    
+    const statusIndex = steps.findIndex(s => s.id === status);
+    
+    timeline.innerHTML = steps.map((s, idx) => {
+      let stateClass = '';
+      if (idx < statusIndex) stateClass = 'completed';
+      else if (idx === statusIndex) stateClass = 'active';
+      
+      return `
+        <div class="timeline-step ${stateClass}">
+          <div class="timeline-icon">${s.icon}</div>
+          <div class="timeline-label">${s.label}</div>
+        </div>
+      `;
+    }).join('');
+  }
+</script>
+<script src="js/dev-panel.js"></script>
+</body>
+</html>

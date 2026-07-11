@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>فيونكة | متجر الأناقة والجمال</title>
+  <meta name="description" content="فيونكة - متجرك المفضل للملابس، الأحذية، الإكسسوارات، الحقائب، العطور ومستحضرات التجميل. أرقى الأزياء بأفضل الأسعار.">
+  <meta name="keywords" content="فيونكة، ملابس، أحذية، إكسسوارات، حقائب، عطور، مستحضرات تجميل، تسوق أونلاين">
+  <meta property="og:title" content="فيونكة | متجر الأناقة والجمال">
+  <meta property="og:description" content="اكتشفي أرقى المجموعات من الملابس والإكسسوارات والعطور">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎀</text></svg>">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="mainHeader">
+  <!-- Top Banner -->
+  <div class="header-top">
+    <span>🎀 شحن مجاني على الطلبات فوق 2000 جنيه | كود الخصم: <strong>WELCOME20</strong> خصم 20% للعملاء الجدد</span>
+  </div>
+
+  <!-- Main Header -->
+  <div class="header-main">
+    <!-- Logo -->
+    <a href="index.html" class="logo">
+      <div>
+        <div class="logo-text">فيونكة</div>
+        <span class="logo-sub">Fayonka</span>
+      </div>
+    </a>
+
+    <!-- Search Bar -->
+    <div class="header-search" style="display:flex;flex-direction:column;position:relative">
+      <input type="text" id="headerSearch" placeholder="ابحثي عن منتج..." autocomplete="off">
+      <button class="header-search-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <div class="search-dropdown" id="searchDropdown"></div>
+    </div>
+
+    <!-- Actions -->
+    <div class="header-actions">
+      <!-- Mobile Search -->
+      <button class="header-action-btn" id="mobileSearchToggle" title="بحث" style="display:none">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+
+      <!-- Language -->
+      <button class="header-action-btn" id="langToggle" title="اللغة">EN</button>
+
+      <!-- Theme -->
+      <button class="header-action-btn" id="themeToggle" title="الوضع الليلي"></button>
+
+      <!-- Wishlist -->
+      <a href="wishlist.html" class="header-action-btn" title="المفضلة">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="header-badge wishlist-badge" style="display:none">0</span>
+      </a>
+
+      <!-- Cart -->
+      <a href="cart.html" class="header-action-btn" title="السلة">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="header-badge cart-badge" style="display:none">0</span>
+      </a>
+
+      <!-- Menu Toggle (Mobile) -->
+      <button class="header-action-btn" id="menuToggle" style="display:none">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="mobileMenu">
+    <ul class="nav-list">
+      <li class="nav-item"><a href="index.html" class="nav-link">الرئيسية</a></li>
+      <li class="nav-item"><a href="products.html" class="nav-link">جميع المنتجات</a></li>
+      <li class="nav-item"><a href="products.html?category=c1" class="nav-link">👗 ملابس</a></li>
+      <li class="nav-item"><a href="products.html?category=c2" class="nav-link">👠 أحذية</a></li>
+      <li class="nav-item"><a href="products.html?category=c3" class="nav-link">💍 إكسسوارات</a></li>
+      <li class="nav-item"><a href="products.html?category=c4" class="nav-link">👜 حقائب</a></li>
+      <li class="nav-item"><a href="products.html?category=c5" class="nav-link">🌺 عطور</a></li>
+      <li class="nav-item"><a href="products.html?category=c6" class="nav-link">💄 تجميل</a></li>
+      <li class="nav-item"><a href="products.html?sale=true" class="nav-link" style="color:var(--danger);font-weight:700">🔥 تخفيضات</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ============ HERO SLIDER ============ -->
+<section class="hero-slider" id="heroSlider">
+  <div class="slider-track" id="sliderTrack">
+    <!-- Slides rendered by JS -->
+  </div>
+  <button class="slider-btn prev" id="sliderPrev">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <button class="slider-btn next" id="sliderNext">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="slider-dots" id="sliderDots"></div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee-wrapper">
+  <div class="marquee-track">
+    <span>✨ كولكشن الصيف 2025</span>
+    <span>🔥 خصومات حتى 50%</span>
+    <span>🚚 شحن سريع لجميع المحافظات</span>
+    <span>💎 منتجات أصلية 100%</span>
+    <span>🎀 أسلوب راقٍ بأسعار مناسبة</span>
+    <span>⭐ تقييم 4.9 من عملائنا</span>
+    <span>✨ كولكشن الصيف 2025</span>
+    <span>🔥 خصومات حتى 50%</span>
+    <span>🚚 شحن سريع لجميع المحافظات</span>
+    <span>💎 منتجات أصلية 100%</span>
+    <span>🎀 أسلوب راقٍ بأسعار مناسبة</span>
+    <span>⭐ تقييم 4.9 من عملائنا</span>
+  </div>
+</div>
+
+<!-- ============ FEATURES STRIP ============ -->
+<section class="features-strip">
+  <div class="container">
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-icon">🚚</div>
+        <div>
+          <div class="feature-title">شحن سريع</div>
+          <div class="feature-desc">توصيل لجميع المحافظات</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🔄</div>
+        <div>
+          <div class="feature-title">استبدال سهل</div>
+          <div class="feature-desc">خلال 14 يوم من الاستلام</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">💎</div>
+        <div>
+          <div class="feature-title">جودة مضمونة</div>
+          <div class="feature-desc">منتجات أصلية 100%</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">💳</div>
+        <div>
+          <div class="feature-title">الدفع عند الاستلام</div>
+          <div class="feature-desc">لجميع الطلبات</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CATEGORIES ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-title-wrapper">
+        <div class="section-eyebrow">تصفحي المجموعات</div>
+        <h2 class="section-title">الأقسام <span>الرئيسية</span></h2>
+      </div>
+      <a href="products.html" class="section-view-all">
+        كل المنتجات
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      </a>
+    </div>
+    <div class="categories-grid" id="categoriesGrid">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ============ BEST SELLERS ============ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-title-wrapper">
+        <div class="section-eyebrow">الأكثر شراءً</div>
+        <h2 class="section-title">الأكثر <span>مبيعاً</span> 🔥</h2>
+      </div>
+      <a href="products.html?sort=best_selling" class="section-view-all">
+        عرض الكل
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      </a>
+    </div>
+    <div class="grid grid-auto stagger" id="bestSellersGrid">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROMO BANNER ============ -->
+<section class="promo-banner">
+  <div class="container">
+    <div class="promo-grid">
+      <div class="promo-card promo-card-large">
+        <div class="promo-bg" style="background-image:url('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=700&q=80')"></div>
+        <div class="promo-overlay"></div>
+        <div class="promo-content">
+          <span class="promo-tag">جديد</span>
+          <h3>كولكشن الصيف 2025</h3>
+          <p>أحدث صيحات الموضة بأسعار رائعة</p>
+          <a href="products.html?category=c1" class="btn btn-primary">تسوقي الآن</a>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <div class="promo-card promo-card-small">
+          <div class="promo-bg" style="background-image:url('https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=500&q=80')"></div>
+          <div class="promo-overlay"></div>
+          <div class="promo-content">
+            <span class="promo-tag">عروض</span>
+            <h3>عطور فاخرة</h3>
+            <p>خصم حتى 30%</p>
+            <a href="products.html?category=c5" class="btn btn-outline" style="color:white;border-color:white">اكتشفي</a>
+          </div>
+        </div>
+        <div class="promo-card promo-card-small">
+          <div class="promo-bg" style="background-image:url('https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500&q=80')"></div>
+          <div class="promo-overlay"></div>
+          <div class="promo-content">
+            <span class="promo-tag">أحدث</span>
+            <h3>حقائب فاخرة</h3>
+            <p>تصاميم حصرية</p>
+            <a href="products.html?category=c4" class="btn btn-outline" style="color:white;border-color:white">اكتشفي</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEW ARRIVALS ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-title-wrapper">
+        <div class="section-eyebrow">وصل حديثاً</div>
+        <h2 class="section-title">أحدث <span>المنتجات</span> ✨</h2>
+      </div>
+      <a href="products.html?sort=newest" class="section-view-all">
+        عرض الكل
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      </a>
+    </div>
+    <div class="grid grid-auto stagger" id="newArrivalsGrid">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ============ ON SALE ============ -->
+<section class="section sale-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-title-wrapper">
+        <div class="section-eyebrow">عروض محدودة</div>
+        <h2 class="section-title">المنتجات <span>المخفضة</span> 🏷️</h2>
+      </div>
+      <a href="products.html?sale=true" class="section-view-all">
+        كل التخفيضات
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      </a>
+    </div>
+    <div class="grid grid-auto stagger" id="onSaleGrid">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ============ RECENTLY VIEWED ============ -->
+<section class="section" id="recentlyViewedSection" style="display:none;background:var(--bg-secondary)">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-title-wrapper">
+        <div class="section-eyebrow">تاريخ التصفح</div>
+        <h2 class="section-title">شاهدتِ <span>مؤخراً</span></h2>
+      </div>
+    </div>
+    <div class="grid grid-auto" id="recentlyViewedGrid">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-title-wrapper">
+        <div class="section-eyebrow">آراء عملائنا</div>
+        <h2 class="section-title">ماذا تقول <span>عميلاتنا</span></h2>
+      </div>
+    </div>
+    <div class="testimonials-grid" id="testimonialsGrid">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEWSLETTER ============ -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-content">
+      <div class="newsletter-icon">🎀</div>
+      <h2>انضمي لعائلة فيونكة</h2>
+      <p>اشتركي في النشرة البريدية واحصلي على كود خصم 15% على أول طلب</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="أدخلي بريدك الإلكتروني..." id="newsletterEmail">
+        <button class="btn btn-primary" onclick="subscribeNewsletter()">اشتركي الآن</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo-text">فيونكة</div>
+      <p class="footer-desc">متجرك المفضل للأناقة والجمال. نقدم لكِ أرقى المنتجات من ملابس وأحذية وإكسسوارات وعطور بأفضل الأسعار وأعلى جودة.</p>
+      <div class="footer-social">
+        <a href="#" class="social-btn" title="إنستقرام">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" class="social-btn" title="فيسبوك">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="#" class="social-btn" title="تيك توك">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.93a8.28 8.28 0 004.84 1.56V7.03a4.85 4.85 0 01-1.07-.34z"/></svg>
+        </a>
+        <a href="https://wa.me/0100000000" class="social-btn" title="واتساب">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <h4 class="footer-title">تسوق</h4>
+      <ul class="footer-links">
+        <li><a href="products.html?category=c1" class="footer-link">👗 ملابس</a></li>
+        <li><a href="products.html?category=c2" class="footer-link">👠 أحذية</a></li>
+        <li><a href="products.html?category=c3" class="footer-link">💍 إكسسوارات</a></li>
+        <li><a href="products.html?category=c4" class="footer-link">👜 حقائب</a></li>
+        <li><a href="products.html?category=c5" class="footer-link">🌺 عطور</a></li>
+        <li><a href="products.html?category=c6" class="footer-link">💄 تجميل</a></li>
+        <li><a href="products.html?sale=true" class="footer-link" style="color:#E05252">🔥 تخفيضات</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="footer-title">خدمة العملاء</h4>
+      <ul class="footer-links">
+        <li><a href="order-tracking.html" class="footer-link">📦 تتبع طلبك</a></li>
+        <li><a href="privacy.html" class="footer-link">🔒 سياسة الخصوصية</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="footer-title">عن فيونكة</h4>
+      <ul class="footer-links">
+        <li><a href="admin/login.html" class="footer-link">🔐 لوحة الإدارة</a></li>
+      </ul>
+      <div style="margin-top:20px">
+        <h4 class="footer-title">تواصل معنا</h4>
+        <div class="footer-link" style="cursor:default">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          0100 000 0000
+        </div>
+        <div class="footer-link" style="cursor:default">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          info@fayonka.com
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <span>© 2025 فيونكة. جميع الحقوق محفوظة</span>
+      <div class="footer-developer">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        تم التطوير بـ
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#e25555" stroke-width="2" fill="#e25555"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="#e25555"/></svg>
+        بواسطة <a href="https://wa.me/201556269794" target="_blank" style="color:var(--primary);font-weight:bold;">مؤمن</a>
+      </div>
+      <div style="display:flex;gap:16px;font-size:0.75rem">
+        <a href="privacy.html" class="footer-link">الخصوصية</a>
+        </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ SCRIPTS ============ -->
+<script src="js/db.js"></script>
+<script src="js/app.js"></script>
+<script src="js/home.js"></script>
+<script src="js/dev-panel.js"></script>
+</body>
+</html>

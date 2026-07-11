@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل دخول الإدارة | فيونكة</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎀</text></svg>">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    body {
+      background: var(--bg-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .auth-container {
+      width: 100%;
+      max-width: 400px;
+      padding: var(--space-xl);
+    }
+    .auth-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-xl);
+      padding: var(--space-2xl);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+    }
+    .auth-logo {
+      text-align: center;
+      margin-bottom: var(--space-2xl);
+    }
+    .auth-logo .logo-text {
+      font-size: 2rem;
+      font-family: var(--font-display);
+      color: var(--primary);
+    }
+    .auth-logo .logo-sub {
+      color: var(--text-muted);
+      letter-spacing: 2px;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <div class="logo-text">فيونكة</div>
+      <div class="logo-sub">ADMIN PANEL</div>
+    </div>
+
+    <!-- Login Form -->
+    <form id="loginForm" onsubmit="handleLogin(event)">
+      <div class="form-group mb-md">
+        <label class="form-label required">اسم المستخدم</label>
+        <input type="text" id="username" class="form-input" required autocomplete="username">
+      </div>
+      <div class="form-group mb-lg">
+        <div style="display:flex;justify-content:space-between">
+          <label class="form-label required">كلمة المرور</label>
+          <a href="#" onclick="toggleResetForm(true)" style="font-size:0.8rem;color:var(--primary)">نسيت كلمة المرور؟</a>
+        </div>
+        <input type="password" id="password" class="form-input" required autocomplete="current-password">
+      </div>
+      
+      <button type="submit" class="btn btn-primary w-full btn-lg">تسجيل الدخول</button>
+      
+      <div class="text-center mt-md">
+        <a href="../index.html" class="text-muted" style="font-size:0.85rem">العودة للمتجر</a>
+      </div>
+    </form>
+
+    <!-- Reset Password Form -->
+    <form id="resetForm" onsubmit="handleReset(event)" style="display:none">
+      <h3 style="margin-bottom:var(--space-md);font-size:1.1rem;text-align:center">استعادة كلمة المرور</h3>
+      <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:var(--space-lg);text-align:center">
+        يرجى إدخال اسم المستخدم ورقم الاستعادة (Recovery Code) الخاص بمدير النظام (Owner) وتعيين كلمة مرور جديدة.
+      </p>
+
+      <div class="form-group mb-md">
+        <label class="form-label required">اسم المستخدم الخاص بك</label>
+        <input type="text" id="resetUsername" class="form-input" required>
+      </div>
+      
+      <div class="form-group mb-md">
+        <label class="form-label required">رقم الاستعادة (Recovery Code)</label>
+        <input type="text" id="recoveryCode" class="form-input" required>
+      </div>
+
+      <div class="form-group mb-lg">
+        <label class="form-label required">كلمة المرور الجديدة</label>
+        <input type="password" id="newPassword" class="form-input" required>
+      </div>
+      
+      <button type="submit" class="btn btn-primary w-full btn-lg mb-sm">تحديث كلمة المرور</button>
+      <button type="button" class="btn btn-ghost w-full" onclick="toggleResetForm(false)">رجوع لتسجيل الدخول</button>
+    </form>
+    
+  </div>
+</div>
+
+<script src="../js/db.js"></script>
+<script src="../js/app.js"></script>
+<script>
+  // Redirect if already logged in
+  if (DB.getSession()) {
+    window.location.href = 'index.html';
+  }
+
+  function handleLogin(e) {
+    e.preventDefault();
+    const user = document.getElementById('username').value.trim();
+    const pass = document.getElementById('password').value;
+    
+    if (!user || !pass) return;
+
+    const admin = DB.authenticateAdmin(user, pass);
+    if (admin) {
+      DB.setSession(admin);
+      DB.log(admin.id, admin.name, 'login', 'system', null, 'تسجيل دخول للنظام');
+      window.location.href = 'index.html';
+    } else {
+      App.toast('error', 'خطأ في الدخول', 'اسم المستخدم أو كلمة المرور غير صحيحة');
+    }
+  }
+
+  function toggleResetForm(show) {
+    document.getElementById('loginForm').style.display = show ? 'none' : 'block';
+    document.getElementById('resetForm').style.display = show ? 'block' : 'none';
+  }
+
+  function handleReset(e) {
+    e.preventDefault();
+    const user = document.getElementById('resetUsername').value.trim();
+    const code = document.getElementById('recoveryCode').value.trim();
+    const newPass = document.getElementById('newPassword').value;
+
+    if (!user || !code || !newPass) return;
+
+    const success = DB.resetPasswordWithCode(user, newPass, code);
+    if (success) {
+      App.toast('success', 'تم بنجاح', 'تم تحديث كلمة المرور بنجاح. يمكنك تسجيل الدخول الآن.');
+      document.getElementById('resetForm').reset();
+      toggleResetForm(false);
+    } else {
+      App.toast('error', 'فشل الاستعادة', 'اسم المستخدم غير صحيح أو رقم الاستعادة خاطئ');
+    }
+  }
+</script>
+<script src="../js/dev-panel.js"></script>
+</body>
+</html>

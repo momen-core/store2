@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سلة المشتريات | فيونكة</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎀</text></svg>">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/cart.css">
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="mainHeader">
+  <div class="header-main">
+    <a href="index.html" class="logo">
+      <div>
+        <div class="logo-text">فيونكة</div>
+        <span class="logo-sub">Fayonka</span>
+      </div>
+    </a>
+    <div class="header-actions">
+      <a href="products.html" class="btn btn-outline" style="border-radius:var(--radius-full)">متابعة التسوق</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ PROGRESS STEPS ============ -->
+<div class="container mt-xl mb-xl">
+  <div class="steps" style="max-width:600px;margin:0 auto">
+    <div class="step active">
+      <div class="step-circle">1</div>
+      <div class="step-label">سلة المشتريات</div>
+    </div>
+    <div class="step">
+      <div class="step-circle">2</div>
+      <div class="step-label">بيانات التوصيل</div>
+    </div>
+    <div class="step">
+      <div class="step-circle">3</div>
+      <div class="step-label">تأكيد الطلب</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CART CONTENT ============ -->
+<main class="section pt-0" style="min-height:50vh">
+  <div class="container">
+    
+    <!-- Empty State -->
+    <div id="emptyCartState" style="display:none" class="empty-state">
+      <div class="empty-state-icon">🛒</div>
+      <h3 class="empty-state-title">سلة المشتريات فارغة</h3>
+      <p class="empty-state-msg">لم تقومي بإضافة أي منتجات للسلة بعد.</p>
+      <a href="products.html" class="btn btn-primary mt-md">تسوقي الآن</a>
+    </div>
+
+    <div class="cart-layout" id="cartLayout" style="display:none">
+      <!-- Items List -->
+      <div class="cart-items-section">
+        <div class="card">
+          <div class="card-header">
+            <h2 style="font-size:1.1rem;margin:0">محتويات السلة (<span id="cartCountHeader">0</span>)</h2>
+          </div>
+          <div class="card-body p-0">
+            <div id="cartItemsList">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+          <div class="card-footer flex-between">
+            <button class="btn btn-ghost text-danger" onclick="clearCartConfirm()">إفراغ السلة</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order Summary -->
+      <div class="cart-summary-section">
+        <div class="card" style="position:sticky;top:90px">
+          <div class="card-header">
+            <h2 style="font-size:1.1rem;margin:0">ملخص الطلب</h2>
+          </div>
+          <div class="card-body">
+            
+            <div class="summary-row">
+              <span class="text-secondary">المجموع الفرعي</span>
+              <span class="font-bold" id="summarySubtotal">0 جنيه</span>
+            </div>
+
+            <div class="summary-row mt-sm" id="summaryDiscountRow" style="display:none;color:var(--success)">
+              <span>الخصم (كوبون)</span>
+              <span class="font-bold" id="summaryDiscount">-0 جنيه</span>
+            </div>
+
+            <!-- Shipping Calculator -->
+            <div class="shipping-calculator mt-md mb-md">
+              <label class="form-label" style="font-size:0.8rem">احسبي رسوم الشحن:</label>
+              <select class="form-select form-input mt-xs" id="shippingGovSelect" onchange="calculateShipping()">
+                <option value="">اختاري المحافظة...</option>
+                <!-- Rendered by JS -->
+              </select>
+            </div>
+
+            <div class="summary-row">
+              <span class="text-secondary">رسوم الشحن</span>
+              <span class="font-bold" id="summaryShipping">---</span>
+            </div>
+
+            <div class="divider mt-md mb-md"></div>
+
+            <div class="summary-row total">
+              <span>الإجمالي</span>
+              <span id="summaryTotal">0 جنيه</span>
+            </div>
+            
+            <div class="text-muted text-center mt-xs" style="font-size:0.75rem">الأسعار تشمل ضريبة القيمة المضافة</div>
+
+            <!-- Coupon -->
+            <div class="coupon-box mt-lg">
+              <div style="display:flex;gap:var(--space-xs)">
+                <input type="text" id="couponCode" class="form-input" placeholder="كود الخصم" style="text-transform:uppercase">
+                <button class="btn btn-secondary" onclick="applyCoupon()" id="applyCouponBtn">تفعيل</button>
+              </div>
+              <div id="couponMessage" style="font-size:0.8rem;margin-top:8px"></div>
+            </div>
+
+            <a href="checkout.html" class="btn btn-primary w-full mt-lg btn-lg">
+              إتمام الطلب
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer-bottom" style="border-top:none">
+    <div class="footer-bottom-inner" style="justify-content:center">
+      <span>© 2025 فيونكة. جميع الحقوق محفوظة</span>
+      <div class="footer-developer" style="margin-right:15px; border-right:1px solid rgba(255,255,255,0.2); padding-right:15px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        تم التطوير بـ
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#e25555" stroke-width="2" fill="#e25555"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="#e25555"/></svg>
+        بواسطة <a href="https://wa.me/201556269794" target="_blank" style="color:var(--primary);font-weight:bold;">مؤمن</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/db.js"></script>
+<script src="js/app.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/dev-panel.js"></script>
+</body>
+</html>
